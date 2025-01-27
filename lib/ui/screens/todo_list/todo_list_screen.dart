@@ -5,7 +5,6 @@ import 'package:todo/ui/screens/todo_list/all_todo_list_tab.dart';
 import 'package:todo/ui/screens/todo_list/done_todo_list_tab.dart';
 import 'package:todo/ui/screens/todo_list/undone_todo_list_tab.dart';
 
-
 class TodoListScreen extends StatefulWidget {
   const TodoListScreen({super.key});
 
@@ -23,12 +22,19 @@ class _TodoListScreenState extends State<TodoListScreen>
       length: 3,
       child: Scaffold(
         appBar: AppBar(
-          title:const Text("TODO LIST"),
+          title: const Text("TODO LIST"),
           bottom: _buildTabBar(),
         ),
-        body:const TabBarView(
-          children: [
-          AllTodoListTab(),
+        body: TabBarView(children: [
+          AllTodoListTab(
+            todoList: _todoList,
+            onDelete: (int index) {
+              _deleteTodo(index);
+            },
+            onStatusChange: (int index) {
+              _toggoleTodoState(index);
+            },
+          ),
           UndoneTodoListTab(),
           DoneTodoListTab(),
         ]),
@@ -50,17 +56,37 @@ class _TodoListScreenState extends State<TodoListScreen>
   }
 
   TabBar _buildTabBar() {
-    return const TabBar(
-          tabs: [
-          Tab(
-            text: "All",
-          ),
-          Tab(
-            text: "UnDone",
-          ),
-          Tab(
-            text: "Done",
-          ),
-        ]);
+    return const TabBar(tabs: [
+      Tab(
+        text: "All",
+      ),
+      Tab(
+        text: "UnDone",
+      ),
+      Tab(
+        text: "Done",
+      ),
+    ]);
+  }
+
+  void _addNewTodo(Todo todo) {
+    _todoList.add(todo);
+    if (mounted) {
+      setState(() {});
+    }
+  }
+
+  void _deleteTodo(int index) {
+    _todoList.removeAt(index);
+    if (mounted) {
+      setState(() {});
+    }
+  }
+
+  void _toggoleTodoState(int index) {
+    _todoList[index].isdone = !_todoList[index].isdone;
+    if (mounted) {
+      setState(() {});
+    }
   }
 }
