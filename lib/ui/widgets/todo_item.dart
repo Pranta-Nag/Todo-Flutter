@@ -13,7 +13,7 @@ class TodoItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.symmetric(horizontal: 15, vertical: 4),
+      margin:const EdgeInsets.symmetric(horizontal: 15, vertical: 4),
       surfaceTintColor: _buildSurfaceTintColor(todo.isdone),
       color: _buildColor(todo.isdone),
       child: ListTile(

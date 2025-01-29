@@ -11,15 +11,18 @@ class AddNewTodoScreen extends StatefulWidget {
 }
 
 class _AddNewTodoScreenState extends State<AddNewTodoScreen> {
-
-final TextEditingController _titleTeController = TextEditingController();
-final TextEditingController _descriptionTeController = TextEditingController();
-final GlobalKey<FormState> _fromKey = GlobalKey<FormState>();
+  final TextEditingController _titleTeController = TextEditingController();
+  final TextEditingController _descriptionTeController =
+      TextEditingController();
+  final GlobalKey<FormState> _fromKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Add new screen"),),
+      appBar: AppBar(
+        title: const Text("Add new screen"),
+        backgroundColor: Colors.amber,
+      ),
       body: Padding(
         padding: const EdgeInsets.all(14),
         child: Form(
@@ -28,16 +31,16 @@ final GlobalKey<FormState> _fromKey = GlobalKey<FormState>();
             children: [
               TextFormField(
                 controller: _titleTeController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: 'Title',
                   labelText: 'Title',
                 ),
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
-                validator: (String? value){
-                  if(value?.trim().isEmpty ?? true){
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                validator: (String? value) {
+                  if (value?.trim().isEmpty ?? true) {
                     return 'Enter a Title';
                   }
-                    return null;
+                  return null;
                 },
               ),
               const SizedBox(height: 10),
@@ -49,30 +52,32 @@ final GlobalKey<FormState> _fromKey = GlobalKey<FormState>();
                 ),
                 maxLength: 200,
                 autovalidateMode: AutovalidateMode.onUserInteraction,
-                 validator: (String? value){
-                  if(value?.trim().isEmpty ?? true){
+                validator: (String? value) {
+                  if (value?.trim().isEmpty ?? true) {
                     return 'Enter your Description';
                   }
-                    return null;
+                  return null;
                 },
               ),
-               const SizedBox(height: 10),
-               ElevatedButton(onPressed: (){
-                if(_fromKey.currentState!.validate()){
-                  Todo todo = Todo(_titleTeController.text.trim(), _descriptionTeController.text.trim(), DateTime.now());
-                  widget.addNewTodo(todo);
-                  Navigator.pop(context);
-                }
-
-               }, child: Text("Add"),),
+              const SizedBox(height: 10),
+              ElevatedButton(
+                onPressed: () {
+                  if (_fromKey.currentState!.validate()) {
+                    Todo todo = Todo(_titleTeController.text.trim(),
+                        _descriptionTeController.text.trim(), DateTime.now());
+                    widget.addNewTodo(todo);
+                    Navigator.pop(context);
+                  }
+                },
+                child: Text("Add"),
+              ),
             ],
           ),
         ),
       ),
     );
-
-    
   }
+
   @override
   void dispose() {
     _titleTeController.dispose();

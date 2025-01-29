@@ -14,7 +14,7 @@ class TodoListScreen extends StatefulWidget {
 
 class _TodoListScreenState extends State<TodoListScreen>
     with SingleTickerProviderStateMixin {
-  List<Todo> _todoList = [];
+  final List<Todo> _todoList = [];
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +23,7 @@ class _TodoListScreenState extends State<TodoListScreen>
       child: Scaffold(
         appBar: AppBar(
           title: const Text("TODO LIST"),
+          backgroundColor: Colors.orangeAccent.shade400,
           bottom: _buildTabBar(),
         ),
         body: TabBarView(children: [
