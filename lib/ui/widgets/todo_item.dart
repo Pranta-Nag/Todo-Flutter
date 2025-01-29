@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:todo/entities/todo.dart';
 
 class TodoItem extends StatelessWidget {
@@ -9,11 +10,11 @@ class TodoItem extends StatelessWidget {
   });
   final Todo todo;
   final VoidCallback onIconButtonPressed;
-  
+
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin:const EdgeInsets.symmetric(horizontal: 15, vertical: 4),
+      margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 4),
       surfaceTintColor: _buildSurfaceTintColor(todo.isdone),
       color: _buildColor(todo.isdone),
       child: ListTile(
@@ -29,7 +30,8 @@ class TodoItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(todo.subtitle),
-            Text(todo.time.toString()),
+            const SizedBox(height: 3),
+            Text(DateFormat.yMEd().add_jms().format(todo.time)),
           ],
         ),
         trailing: _buildRoundedIconButton(todo.isdone),
@@ -56,10 +58,11 @@ class TodoItem extends StatelessWidget {
     return isdone ? TextDecoration.lineThrough : null;
   }
 
-  Color? _buildSurfaceTintColor(bool isdone){
+  Color? _buildSurfaceTintColor(bool isdone) {
     return isdone ? Colors.green : null;
   }
-   Color? _buildColor(bool isdone){
+
+  Color? _buildColor(bool isdone) {
     return isdone ? Colors.pink.shade200 : null;
   }
 }
