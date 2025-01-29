@@ -42,7 +42,7 @@ class TodoItem extends StatelessWidget {
       onTap: onIconButtonPressed,
       child: CircleAvatar(
         child: Icon(
-          _buildIcon(true),
+          _buildIcon(!todo.isdone),
         ),
       ),
     );

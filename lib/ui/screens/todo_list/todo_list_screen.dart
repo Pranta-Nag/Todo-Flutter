@@ -31,8 +31,16 @@ class _TodoListScreenState extends State<TodoListScreen>
             onDelete: _deleteTodo,
             onStatusChange: _toggoleTodoState,
           ),
-          UndoneTodoListTab(),
-          DoneTodoListTab(),
+          UndoneTodoListTab(
+             todoList: _todoList.where((item) => item.isdone == false).toList(),
+            onDelete: _deleteTodo,
+            onStatusChange: _toggoleTodoState,
+          ),
+          DoneTodoListTab(
+            todoList: _todoList.where((item) => item.isdone == true).toList(),
+            onDelete: _deleteTodo,
+            onStatusChange: _toggoleTodoState,
+          ),
         ]),
         floatingActionButton: FloatingActionButton.extended(
           onPressed: () {

@@ -16,7 +16,7 @@ class AllTodoListTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-        itemCount: 5,
+        itemCount: todoList.length,
         itemBuilder: (context, index) {
           return Dismissible(
             key: UniqueKey(),
