@@ -28,12 +28,8 @@ class _TodoListScreenState extends State<TodoListScreen>
         body: TabBarView(children: [
           AllTodoListTab(
             todoList: _todoList,
-            onDelete: (int index) {
-              _deleteTodo(index);
-            },
-            onStatusChange: (int index) {
-              _toggoleTodoState(index);
-            },
+            onDelete: _deleteTodo,
+            onStatusChange: _toggoleTodoState,
           ),
           UndoneTodoListTab(),
           DoneTodoListTab(),
@@ -43,7 +39,7 @@ class _TodoListScreenState extends State<TodoListScreen>
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => AddNewTodoScreen(),
+                builder: (context) => AddNewTodoScreen(addNewTodo: _addNewTodo),
               ),
             );
           },
